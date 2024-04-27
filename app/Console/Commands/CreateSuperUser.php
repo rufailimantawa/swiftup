@@ -14,7 +14,7 @@ class CreateSuperUser extends Command
      *
      * @var string
      */
-    protected $signature = 'app:create-super-user {email?} {mobileNumber?} {username?}';
+    protected $signature = 'app:create-super-user {email?} {fullname?} {mobileNumber?} {username?} {gender?} {password?}';
 
     /**
      * The console command description.
@@ -132,7 +132,7 @@ class CreateSuperUser extends Command
     protected function checkFullname()
     {
         $started = false;
-        $input = $this->argument('username');
+        $input = $this->argument('fullname');
 
         while (true) {
             $validator = Validator::make([
@@ -157,15 +157,17 @@ class CreateSuperUser extends Command
 
     protected function checkGender()
     {
-        $input = $this->choice(
-            'Select gender',
-            [
-                'None',
-                'male',
-                'female'
-            ], 
-            'None'
-        );
+        if (is_null($input = $this->argument('gender')) || !in_array($input, ['male', 'female'])) {
+            $input = $this->choice(
+                'Select gender',
+                [
+                    'None',
+                    'male',
+                    'female'
+                ], 
+                'None'
+            );
+        }
 
         return $input;
     }
@@ -173,9 +175,8 @@ class CreateSuperUser extends Command
     protected function checkPassword()
     {
         $started = false;
-        $input = '';
-        $input_confirmation = '';
-        
+        $input = $input_confirmation =  $this->argument('password');
+
         while (true) {
             $validator = Validator::make([
                 'input' => $input,

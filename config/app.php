@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'SwiftUp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://swiftup.com.ng'),
 
     /*
     |--------------------------------------------------------------------------
@@ -123,4 +123,15 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'meta' => [
+        'title' => "SwiftUp - Buy Airtime and Data for all Network",
+        'description' => "Buy Cheap Internet Data Plan and Airtime Recharge for Airtel, 9mobile, GLO, MTN",
+        'keywords' => "SwiftUp, VTU, topup, airtime, data plan, data subscription",
+    ],
+
+    'social' => [
+        'img' => "/social-banner.png",
+        'img-square' => "/social-banner-square.png",
+        'url' => env('APP_URL', 'http://swiftup.com.ng')
+    ]
 ];

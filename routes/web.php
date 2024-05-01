@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationController;
@@ -33,3 +36,11 @@ Route::prefix('/user')->group(function () {
         Route::post('/email/resend', 'resend')->name('verification.resend');
     });
 })->middleware('auth');
+
+Route::prefix('/admin')->group(function () {
+    Route::get('/', [AdminHomeController::class, 'index'])->name('admin.index');
+    Route::resources([
+        'roles' => RoleController::class,
+        'users' => AdminUserController::class,
+    ]);
+});

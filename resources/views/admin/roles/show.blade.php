@@ -9,7 +9,7 @@
                     Role Information
                 </div>
                 <div class="float-end">
-                    <a href="{{ route('roles.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
+                    <a href="{{ route('admin.roles.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
                 </div>
             </div>
             <div class="card-body">

@@ -39,8 +39,10 @@ Route::prefix('/user')->group(function () {
 
 Route::prefix('/admin')->group(function () {
     Route::get('/', [AdminHomeController::class, 'index'])->name('admin.index');
-    Route::resources([
-        'roles' => RoleController::class,
-        'users' => AdminUserController::class,
-    ]);
+    Route::name('admin.')->group(function () {
+        Route::resources([
+            'roles' => RoleController::class,
+            'users' => AdminUserController::class,
+        ]);
+    });
 });

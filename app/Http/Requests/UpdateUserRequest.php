@@ -22,6 +22,12 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'fullname' => "required|string|min:3|max:50",
+            'email' => 'required|email:filter|max:250|unique:users',
+            'username' => "required|string|min:3|max:50|unique:users",
+            'mobile_number' => "required|phone:NG|min:3|max:50|unique:users",
+            'password' => 'required|min:8|confirmed',
+            'roles' => 'required'
         ];
     }
 }

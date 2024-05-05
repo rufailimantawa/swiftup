@@ -24,7 +24,6 @@ class HomeController extends Controller
                         'name' => 'Users',
                         'icon' => 'fa-users',
                         'count' => number_format(User::get()->count()),
-                        'link' => route('users.index')
                     ],
                     [
                         'icon' => 'fa-voicemail',

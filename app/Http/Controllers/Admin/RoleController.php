@@ -126,7 +126,7 @@ class RoleController extends Controller
             abort(403, 'CAN NOT DELETE SELF ASSIGNED ROLE');
         }
         $role->delete();
-        return redirect()->route('roles.index')
+        return redirect()->route('admin.roles.index')
             ->withSuccess('Role is deleted successfully.');
     }
 }

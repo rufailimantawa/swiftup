@@ -1,3 +1,8 @@
 @include('head')
-@yield('main')
-@yield('footer')
+<body>
+  @yield('main')
+  @yield('footer')
+
+  @stack('templates')
+  @stack('scripts')
+</body>

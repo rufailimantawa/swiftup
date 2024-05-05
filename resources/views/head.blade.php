@@ -6,7 +6,7 @@
 
   <link rel="shortcut icon" type="image/png" href="favicon.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <style>
     html * {
       margin: 0;
@@ -178,10 +178,35 @@
       color: #555;
     }
 
+    section.modal .modal-dialog #serviceOperators {
+      border-radius: 16px;
+    }
+
+    section.modal .modal-dialog #serviceOperators .operator {
+      position: relative;
+    }
+
+    section.modal .modal-dialog #serviceOperators .operator:not([selected]) {
+      opacity: .5;
+    }
+
+    section.modal .modal-dialog #serviceOperators .operator span.fa {
+      background: #92db94;
+      border-radius: 50%;
+      color: #fff;
+      padding: 3px;
+      position: absolute;
+      right: 1.2rem;
+      top: 1.2rem;
+    }
+
+    section.modal .modal-dialog #serviceOperators .operator:not([selected]) span.fa {
+      visibility: hidden;
+    }
+
     section.modal .modal-dialog #serviceAirtimeTopUp-ModalBody,
     section.modal .modal-dialog #serviceDataBundle-ModalBody {
       font-family: sans-serif;
-      /* display: none; */
     }
 
     section.modal .modal-dialog #serviceAirtimeTopUp-ModalBody .set-amount {
@@ -221,4 +246,3 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
-<body>

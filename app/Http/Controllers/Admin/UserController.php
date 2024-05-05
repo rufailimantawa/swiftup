@@ -18,10 +18,10 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:create-user|edit-user|delete-user', ['only' => ['index','show']]);
-        $this->middleware('permission:create-user', ['only' => ['create','store']]);
-        $this->middleware('permission:edit-user', ['only' => ['edit','update']]);
-        $this->middleware('permission:delete-user', ['only' => ['destroy']]);
+        $this->middleware('permission:user:create|user:edit|user:delete', ['only' => ['index','show']]);
+        $this->middleware('permission:user:create', ['only' => ['create','store']]);
+        $this->middleware('permission:user:edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:user:delete', ['only' => ['destroy']]);
     }
     
     /**
@@ -42,7 +42,7 @@ class UserController extends Controller
     {
         return view('admin.users.create', [
             'pageTitle' => "Create User | " . config('app.name'),
-            'roles' => Role::pluck('name')->all()
+            'roles' => Role::orderBy('id', 'DESC')->get()->all()
         ]);
     }
 
@@ -54,10 +54,12 @@ class UserController extends Controller
         $input = $request->all();
         $input['password'] = Hash::make($request->password);
 
+        /** @var User */
         $user = User::create($input);
-        $user->assignRole($request->roles);
+        $user->markEmailAsVerified();
+        $user->assignRole((int)$request->role);
 
-        return redirect()->route('user-index')
+        return redirect()->route('admin.users.index')
             ->withSuccess('New user is added successfully.');
     }
 
@@ -87,8 +89,8 @@ class UserController extends Controller
         return view('admin.users.edit', [
             'pageTitle' => "Edit User | " . config('app.name'),
             'user' => $user,
-            'roles' => Role::pluck('name')->all(),
-            'userRoles' => $user->roles->pluck('name')->all()
+            'roles' => Role::orderBy('id', 'DESC')->get()->all(),
+            'userRole' => $user->roles->first()
         ]);
     }
 
@@ -107,9 +109,9 @@ class UserController extends Controller
         
         $user->update($input);
 
-        $user->syncRoles($request->roles);
+        $user->syncRoles((int) $request->role);
 
-        return redirect()->back()
+        return redirect()->route('admin.users.show', ['user' => $user->id])
             ->withSuccess('User is updated successfully.');
     }
 
@@ -126,7 +128,7 @@ class UserController extends Controller
 
         $user->syncRoles([]);
         $user->delete();
-        return redirect()->route('users.index')
+        return redirect()->route('admin.users.index')
             ->withSuccess('User is deleted successfully.');
     }
 }

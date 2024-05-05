@@ -45,7 +45,7 @@
                 @endif
               </div>
 
-              {{-- 2 column grid layout with text inputs for the first and last names --}}
+              {{-- 2 column grid layout with text inputs for the email and mobile number --}}
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <div class="form-floating">

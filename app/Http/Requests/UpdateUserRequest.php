@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -23,11 +24,37 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'fullname' => "required|string|min:3|max:50",
-            'email' => 'required|email:filter|max:250|unique:users',
-            'username' => "required|string|min:3|max:50|unique:users",
-            'mobile_number' => "required|phone:NG|min:3|max:50|unique:users",
-            'password' => 'required|min:8|confirmed',
-            'roles' => 'required'
+            'email' => [
+                'required',
+                'email:filter',
+                'max:250',
+                Rule::unique(
+                    'users',
+                    'email'
+                )->ignore($this->user->email, 'email')
+            ],
+            'username' => [
+                "required",
+                "string",
+                "min:3",
+                "max:50",
+                Rule::unique(
+                    'users',
+                    'username'
+                )->ignore($this->user->username, 'username')
+            ],
+            'mobile_number' => [
+                "required",
+                "phone:NG",
+                "min:3",
+                "max:50",
+                Rule::unique(
+                    'users',
+                    'mobile_number'
+                )->ignore($this->user->mobile_number, 'mobile_number')
+            ],
+            'password' => 'nullable|string|min:8|confirmed',
+            'role' => 'required'
         ];
     }
 }

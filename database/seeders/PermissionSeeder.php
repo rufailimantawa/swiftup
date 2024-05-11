@@ -21,6 +21,10 @@ class PermissionSeeder extends Seeder
             'user:create',
             'user:edit',
             'user:delete',
+
+            'provider:create',
+            'provider:edit',
+            'provider:delete',
         ];
 
         foreach ($permissions as $permission) {

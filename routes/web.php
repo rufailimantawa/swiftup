@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\ServiceProvidersController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -43,6 +44,7 @@ Route::prefix('/admin')->group(function () {
         Route::resources([
             'roles' => RoleController::class,
             'users' => AdminUserController::class,
+            'providers' => ServiceProvidersController::class,
         ]);
     });
 });

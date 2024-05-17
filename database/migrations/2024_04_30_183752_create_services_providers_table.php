@@ -40,5 +40,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('services_providers');
+        Schema::dropIfExists('services_network_operators');
     }
 };
